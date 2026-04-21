@@ -1,0 +1,321 @@
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  .page{background:var(--color-background-primary);padding:28px 28px 32px;font-family:var(--font-sans);}
+  .header{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:16px;border-bottom:1.5px solid var(--color-text-primary);margin-bottom:20px;}
+  .header-left{}
+  .report-name{font-size:11px;font-weight:500;letter-spacing:1.2px;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:5px;}
+  .report-title{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1.2;}
+  .header-right{text-align:right;}
+  .header-meta{font-size:11px;color:var(--color-text-tertiary);line-height:1.8;}
+  .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border-tertiary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+  .kpi{background:var(--color-background-primary);padding:14px 16px;}
+  .kpi-label{font-size:10px;font-weight:500;letter-spacing:0.6px;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:6px;}
+  .kpi-value{font-size:26px;font-weight:500;color:var(--color-text-primary);line-height:1;}
+  .kpi-value.alert{color:#A32D2D;}
+  .kpi-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:4px;}
+  .kpi-sub.up{color:#3B6D11;}
+  .section-header{font-size:10px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:12px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary);}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px;}
+  .panel{border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:16px;}
+  .panel-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:14px;}
+  .bar-group{margin-bottom:9px;}
+  .bar-meta{display:flex;justify-content:space-between;margin-bottom:4px;}
+  .bar-cat{font-size:11px;color:var(--color-text-secondary);}
+  .bar-pct{font-size:11px;font-weight:500;color:var(--color-text-primary);}
+  .bar-track{height:7px;background:var(--color-background-tertiary);border-radius:2px;overflow:hidden;}
+  .bar-fill{height:7px;border-radius:2px;}
+  .insight-box{background:var(--color-background-secondary);border-radius:6px;padding:10px 12px;margin-top:12px;}
+  .insight-text{font-size:11px;color:var(--color-text-secondary);line-height:1.6;}
+  .insight-text strong{color:var(--color-text-primary);font-weight:500;}
+  .divider{width:100%;height:0.5px;background:var(--color-border-tertiary);margin:4px 0 20px;}
+  .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+  .rec-card{border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:12px 14px;}
+  .rec-segment{font-size:10px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:5px;}
+  .rec-finding{font-size:12px;color:var(--color-text-primary);font-weight:500;margin-bottom:6px;line-height:1.4;}
+  .rec-action{font-size:11px;color:var(--color-text-secondary);line-height:1.5;}
+  .rec-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-bottom:6px;font-weight:500;}
+  .pill-red{background:#FCEBEB;color:#A32D2D;}
+  .pill-amber{background:#FAEEDA;color:#633806;}
+  .pill-green{background:#EAF3DE;color:#3B6D11;}
+  .footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:0.5px solid var(--color-border-tertiary);margin-top:4px;}
+  .footer-note{font-size:10px;color:var(--color-text-tertiary);}
+  .model-badge{font-size:10px;color:var(--color-text-tertiary);background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:4px;padding:3px 8px;}
+</style>
+
+<div class="page">
+  <h2 class="sr-only">UK Customer Churn Intelligence Report — bank dataset analysis of 1,000 customers with 20.4% churn rate, featuring segmentation, behaviour analysis, ML predictions, and recommendations.</h2>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="report-name">Retail Banking · Churn Analysis</div>
+      <div class="report-title">Customer Churn Intelligence Report</div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">Dataset: Bank Customer Churn<br>Customers analysed: 1,000<br>Period: Full portfolio snapshot</div>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-label">Total customers</div>
+      <div class="kpi-value">1,000</div>
+      <div class="kpi-sub">Full portfolio</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Churned customers</div>
+      <div class="kpi-value alert">204</div>
+      <div class="kpi-sub">Exited = 1</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Overall churn rate</div>
+      <div class="kpi-value alert">20.4%</div>
+      <div class="kpi-sub">Industry avg ~15%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Revenue at risk</div>
+      <div class="kpi-value">£18.4M</div>
+      <div class="kpi-sub">Avg balance × churned</div>
+    </div>
+  </div>
+
+  <div class="section-header">Customer segmentation</div>
+  <div class="grid-3">
+    <div class="panel">
+      <div class="panel-title">Churn rate by geography</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Germany</span><span class="bar-pct" style="color:#A32D2D;">32.4%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Spain</span><span class="bar-pct">16.7%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:51.5%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">France</span><span class="bar-pct">16.2%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#888780;"></div></div>
+      </div>
+      <div class="insight-box">
+        <div class="insight-text"><strong>Germany churns at 2× the rate</strong> of France and Spain. Requires market-specific investigation.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Churn rate by age group</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Senior (50+)</span><span class="bar-pct" style="color:#A32D2D;">44.7%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Mid-age (30–50)</span><span class="bar-pct">19.0%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:42.5%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Young (&lt;30)</span><span class="bar-pct" style="color:#3B6D11;">7.6%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:17%;background:#B4B2A9;"></div></div>
+      </div>
+      <div class="insight-box">
+        <div class="insight-text">Nearly <strong>1 in 2 senior customers</strong> leaves. High-value segment with highest lifetime value risk.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Churn rate by gender</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Female</span><span class="bar-pct" style="color:#A32D2D;">25.1%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Male</span><span class="bar-pct">16.5%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:65.7%;background:#888780;"></div></div>
+      </div>
+      <div style="height:28px;"></div>
+      <div class="insight-box">
+        <div class="insight-text">Female customers churn at a <strong>52% higher rate</strong> than male — suggests product-fit or service gap.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">Behaviour analysis</div>
+  <div class="grid-2">
+    <div class="panel">
+      <div class="panel-title">Churn rate by number of products held</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">4 products</span><span class="bar-pct" style="color:#A32D2D;">100%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">3 products</span><span class="bar-pct" style="color:#A32D2D;">82.7%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:82.7%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">1 product</span><span class="bar-pct">27.7%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:27.7%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">2 products</span><span class="bar-pct" style="color:#3B6D11;">7.6%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:7.6%;background:#B4B2A9;"></div></div>
+      </div>
+      <div class="insight-box">
+        <div class="insight-text"><strong>Over-selling is a churn trigger.</strong> Customers with 3–4 products churn at catastrophic rates. 2-product customers are the sweet spot at 7.6%.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Churn rate by activity status &amp; balance</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Inactive members</span><span class="bar-pct" style="color:#A32D2D;">26.9%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Active members</span><span class="bar-pct" style="color:#3B6D11;">14.3%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:53.2%;background:#B4B2A9;"></div></div>
+      </div>
+      <div style="margin:14px 0 10px;height:0.5px;background:var(--color-border-tertiary);"></div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Low balance</span><span class="bar-pct" style="color:#A32D2D;">34.7%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#A32D2D;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">High balance</span><span class="bar-pct">25.2%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:72.7%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Mid balance</span><span class="bar-pct">19.9%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:57.3%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Zero balance</span><span class="bar-pct">13.8%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:39.8%;background:#B4B2A9;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">Predictive model · Random forest classifier</div>
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="panel">
+      <div class="panel-title">Feature importance — top churn drivers</div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Age</span><span class="bar-pct">23.5%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#2C2C2A;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Estimated salary</span><span class="bar-pct">16.0%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:68%;background:#444441;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Credit score</span><span class="bar-pct">15.9%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:67.7%;background:#444441;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Balance</span><span class="bar-pct">14.3%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:60.9%;background:#5F5E5A;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Num of products</span><span class="bar-pct">12.6%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:53.6%;background:#5F5E5A;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Is active member</span><span class="bar-pct">6.0%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:25.5%;background:#888780;"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-meta"><span class="bar-cat">Has credit card</span><span class="bar-pct">2.2%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:9.4%;background:#B4B2A9;"></div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Risk band distribution — 1,000 customers</div>
+      <div style="position:relative;height:120px;" id="riskWrap">
+        <canvas id="riskChart" role="img" aria-label="Bar chart showing risk band distribution: 790 low risk, 47 medium, 35 high, 128 very high risk customers">Risk bands: Low 790, Medium 47, High 35, Very High 128.</canvas>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary);"><span style="width:10px;height:10px;border-radius:2px;background:#B4B2A9;"></span>Low</span>
+        <span style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary);"><span style="width:10px;height:10px;border-radius:2px;background:#888780;"></span>Medium</span>
+        <span style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary);"><span style="width:10px;height:10px;border-radius:2px;background:#5F5E5A;"></span>High</span>
+        <span style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary);"><span style="width:10px;height:10px;border-radius:2px;background:#A32D2D;"></span>Very high</span>
+      </div>
+      <div style="margin-top:14px;padding:10px 12px;border:0.5px solid #F09595;border-radius:6px;background:#FCEBEB;">
+        <div style="font-size:13px;font-weight:500;color:#A32D2D;">128 high-risk customers</div>
+        <div style="font-size:11px;color:#791F1F;margin-top:2px;">Churn probability &gt; 70% · Immediate retention action required</div>
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:var(--color-background-secondary);border-radius:6px;">
+        <div style="font-size:11px;color:var(--color-text-secondary);">Model accuracy: <strong style="color:var(--color-text-primary);">83%</strong> &nbsp;·&nbsp; Precision (churn): <strong style="color:var(--color-text-primary);">78%</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header">Recommendations</div>
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rec-pill pill-red">Critical</div>
+      <div class="rec-segment">Germany market</div>
+      <div class="rec-finding">32.4% churn — 2× other markets</div>
+      <div class="rec-action">Commission market-specific exit survey. Deploy dedicated retention team. Review local competitor offerings.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-pill pill-red">Critical</div>
+      <div class="rec-segment">Senior customers</div>
+      <div class="rec-finding">44.7% churn — nearly 1 in 2 leaves</div>
+      <div class="rec-action">Assign relationship managers to senior accounts. Create loyalty programme for customers aged 50+.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-pill pill-red">Critical</div>
+      <div class="rec-segment">Product bundling</div>
+      <div class="rec-finding">3–4 product customers churn at 83–100%</div>
+      <div class="rec-action">Audit cross-sell practices immediately. Target 2-product portfolios as the optimal retention sweet spot.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-pill pill-amber">High</div>
+      <div class="rec-segment">Inactive members</div>
+      <div class="rec-finding">26.9% churn vs 14.3% for active</div>
+      <div class="rec-action">Trigger re-engagement campaign at 60 days inactivity. Offer incentive for app login or product use.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-pill pill-amber">High</div>
+      <div class="rec-segment">Female customers</div>
+      <div class="rec-finding">25.1% churn — 52% higher than male</div>
+      <div class="rec-action">Investigate service experience gap. Survey recently churned female customers for root cause.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-pill pill-green">Monitor</div>
+      <div class="rec-segment">High-risk cohort</div>
+      <div class="rec-finding">128 customers at &gt;70% churn risk</div>
+      <div class="rec-action">Export list to CRM. Assign to outbound retention calls within 2 weeks. Track monthly.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-note">SQL · Python (Random Forest) · Power BI &nbsp;·&nbsp; Dataset: Bank Customer Churn (Kaggle)</div>
+    <div class="model-badge">Random forest · n=1,000 · accuracy 83%</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const wrap = document.getElementById('riskWrap');
+wrap.style.position = 'relative';
+new Chart(document.getElementById('riskChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Low', 'Medium', 'High', 'Very high'],
+    datasets: [{
+      data: [790, 47, 35, 128],
+      backgroundColor: ['#B4B2A9', '#888780', '#5F5E5A', '#A32D2D'],
+      borderWidth: 0,
+      borderRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.parsed.y + ' customers' } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#888780' }, border: { display: false } },
+      y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10 }, color: '#888780' }, border: { display: false } }
+    }
+  }
+});
+</script>
